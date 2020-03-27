@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Sentiment Analysis Dashboard</title>
+  <link href="https://fonts.googleapis.com/css?family=Rubik:400,500,500i,700,700i,900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery.ui.base.css"> -->
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery.ui.all.css" >
+  <link rel="stylesheet" href="assets/css/boostraprecent.css"/>
+  <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /> -->
+  <!-- <link rel="stylesheet" href="assets/css/css-circular-prog-bar.css"/> -->
+  <!-- <link rel="stylesheet" href="assets/css/progresscircle.css"/> 
+  <link rel="stylesheet" href="assets/css/circle.css">-->
+
+          
+</head>
+<!-- <body onload="showdata()"> -->
+	<body>
+  <div id="wrapper">
+  	<div class="load"></div> 
+  			<header class="container-fluid top-hdr d-flex align-items-center">
+		      <div class="col-md-12">
+		          <h3> <a href="index.html">DASHBOARD</a> </h3>
+		      </div>
+		    </header>
+			<main>
+		 			<section id="dsh-pnl" class="dsh-pnl">
+
+				    	<div class="container-fluid mb-2">
+				    		<div class="row align-items-center d-flex justify-content-between">
+
+				    			<div class="col-md-2 mb-3">
+				    				<div class="pl-0 m-0">
+							        <h6 class="font-weight-bold m-0 p-0">User Reviews</h6>
+							        </div>
+								</div>
+
+								<div class="col-md-10 ml-0 mr-0 mb-3  d-flex justify-content-between align-items-center">
+										<div id="filter-select" class="ml-5 d-flex filter-select ">
+											<label class="p-1 active ">
+											 	<a href="#" class="pl-4 pr-4 pt-1 pb-1">All <span id="all-count">1168</span></a>
+											</label>
+											<label class="p-1">
+												<a href="#" class="pl-4 pr-4 pt-1 pb-1">Positive <span id="pos-count">837</span></a>
+											</label>
+											<label  class="p-1">
+												<a href="#" class="pl-4 pr-4 pt-1 pb-1">Negative <span id="neg-count">397</span></a>
+											</label>
+											<label class="p-1">
+												<a href="#" class="pl-4 pr-4 pt-1 pb-1">Neutral <span id="neu-count">193</span></a>
+											</label>
+											<label class="p-1">
+												<a href="#" class="pl-4 pr-4 pt-1 pb-1">Abusive-Spam <span id="abus-count">256</span></a>
+											</label>
+										</div>
+								</div>
+				    		</div>
+				    	</div>
+
+				    	<div class="container-fluid mb-2">
+				    		<div class="row align-items-top d-flex justify-content-between">
+
+				    			<div class="col-md-12">
+				    				<div class="bg-white pt-3 pb-3 pl-1 pr-1 mb-3 shadow rounded">
+
+				    				<div id="rev-filter" class="rev-filter d-flex pb-3">
+				    					<div class="col-md-7 p-0">
+
+				    							<div class="d-flex">
+
+				    							<div class="col-md-3 pr-0 d-flex justify-content-between align-items-center ">
+				    								<label class="m-0 p-0 font-weight-bold">Category</label>
+				    								<div class="col-md-8 d-flex dropdown-toggle text-left border rounded pl-2 pr-2 pt-1 pb-1 justify-content-between align-items-center" data-toggle="dropdown">
+												      All
+												    </div>
+												    <div class="dropdown-menu">
+												      <a class="dropdown-item" href="#">AAA</a>
+												      <a class="dropdown-item" href="#">BBB</a>
+												      <a class="dropdown-item-text" href="#">CCC</a>
+												      <span class="dropdown-item-text">DDD</span>
+												    </div>
+				    							</div>
+
+				    							<div class="col-md-5  ml-4 d-flex  justify-content-between align-items-center">
+
+				    								<label class="m-0 p-0 font-weight-bold">Date</label>
+
+				    								<div id="frm-cal" class="col-md-5 m-0 p-0 d-flex text-left border rounded justify-content-between align-items-center ">
+				    								<input type="text" name='frm-datepicker' class="col-md-12 pl-2 pr-4 m-0 rounded pt-1 pb-1 border border-0"  value="From" id="frm-datepicker" placeholder="From" >
+  													<span class="fa frm-calendar fa-calendar position-absolute pr-1" style="right:0.4em"></span>
+  													</div>
+
+												    <label class="font-weight-bold m-0 p-0"> - </label>
+
+											    	<div id="to-cal" class="col-md-5 m-0 p-0 d-flex text-left border rounded justify-content-between align-items-center ">
+				    								<input type="text" name='to-datepicker' class="col-md-12 pl-2 pr-4 m-0 rounded pt-1 pb-1 border border-0"  value="To" id="to-datepicker" placeholder="To" >
+  													<span class="fa to-calendar fa-calendar position-absolute pr-1" style="right:0.4em"></span>
+  													</div>
+
+
+				    							</div>
+
+				    							<div class="col-md-2 p-1 m-0 d-flex justify-content-between align-items-center">
+				    								<a id="rev-filter-apply" class="btn m-0 pl-4 pr-4 pt-1 pb-1 cyan text-white filter-apply"> 
+				    									Apply 
+				    								</a>
+				    							</div>
+
+				    							</div>
+					    					
+				    					</div>
+				    					<div class="col-md-5 d-flex justify-content-between align-items-center">
+				    							<div class="col-md-6">
+				    								<input type="text" value="Search for Products Reviewers" placeholder="Search for Products Reviewers" id="search-prdt-reviewer" class="col-md-12 pt-1 p-2 border border-0">
+				    							</div>
+				    							<div class="col-md-6 d-flex justify-content-between align-items-center">
+				    								<div class="col-md-7 d-flex dropdown-toggle text-left border pl-3 pr-3 pt-2 pb-2 justify-content-between align-items-center cyan text-white bulkaction" data-toggle="dropdown">
+												      Bulk Actions
+												    </div>
+												    <div class="dropdown-menu">
+												      <a class="dropdown-item" href="#">Approve</a>
+												      <a class="dropdown-item" href="#">Delete</a>
+												      <a class="dropdown-item-text" href="#">Publish</a>
+												      <span class="dropdown-item-text">Reject</span>
+												    </div>
+												    <div class="col-md-5 ">
+												    	<a id="publish" class="btn m-0 pl-4 pr-4 pt-1 pb-1 cyan text-white publish"> Publish
+				    									</a>
+				    								</div>
+				    							</div>
+				    								
+
+
+				    								</div>
+
+
+				    					</div>
+				    				
+
+
+				    				<!-- Custom Filter Section ENDS Here -->
+
+
+									<div id="sentiment-filter-table" class="d-flex pb-2">
+										<div class="col-md-12 m-0 p-0 table-responsive">
+											<table id="data-table" class="table table-fixed">
+												<thead>
+													<tr>
+														<th><input type="checkbox" id="checkall" name="checkall"></th>
+														<th>Product</th>
+														<th>Sentiments</th>
+														<th>Message</th>
+														<th>Ratings</th>
+														<th>Reviewer</th>
+														<th>Status</th>
+														<th>Actions</th>
+
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td><input type="checkbox" class="prditemtlist" name=""></td>
+														<td><div class="d-flex align-items-center">
+															<div id="prd-img">
+																<img src="assets/images/thumbimg.png" class="prdimg">
+															</div>
+															<div id="prd-details" class="p-2">
+																<h6>SKU 2932</h6>
+																<h5>Product Name Lorem Ipsum dor sit </h5>
+															</div>
+														</div></td>
+														<td><div id="sent-review">
+															<label class="cyan text-white text-uppercase p-1">Positive</label>
+														</div></td>
+														<td><div>Excellent Product</div></td>
+														<td>
+															<div>
+																<fieldset class="rating">
+    <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+    <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+    <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+    <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+    <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+    <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+    <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+    <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+    <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+    <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+															</div>
+														</td>
+														<td><div class="d-flex-inline">
+															<p><a>sysadmin@powerweave.com</a></p>
+															<p><span>12 March, 2020</span></p>
+														</div></td>
+														<td><div id="prd-status"><p class="skyblue-text-color">Approved</p></div></td>
+														<td><div class="d-flex  justify-content-around" style="font-size:1rem;">
+															<p><span><i class="fa fa-trash-o"></i></span></p>
+															<p><span><i class="fa fa-eye"></i></span></p></div>
+														</td>
+													</tr>
+													<tr>
+														<td><input type="checkbox" class="prditemtlist" name=""></td>
+														<td><div class="d-flex align-items-center">
+															<div id="prd-img">
+																<img src="assets/images/thumbimg.png" class="prdimg">
+															</div>
+															<div id="prd-details" class="p-2">
+																<h6>SKU 2932</h6>
+																<h5>Product Name Lorem Ipsum dor sit </h5>
+															</div>
+														</div></td>
+														<td><div id="sent-review">
+															<label class="orange text-white text-uppercase p-1">Neutral</label>
+														</div></td>
+														<td><div>Good Useful </div></td>
+														<td>
+															<div>
+																<fieldset class="rating">
+    <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+    <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+    <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+    <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+    <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+    <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+    <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+    <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+    <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+    <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+															</div>
+														</td>
+														<td><div class="d-flex-inline">
+															<p><a>sysadmin@powerweave.com</a></p>
+															<p><span>12 March, 2020</span></p>
+														</div></td>
+														<td><div id="prd-status"><p class="skyblue-text-color">Approved</p></div></td>
+														<td><div class="d-flex  justify-content-around" style="font-size:1rem;">
+															<p><span><i class="fa fa-trash-o"></i></span></p>
+															<p><span><i class="fa fa-eye"></i></span></p></div>
+														</td>
+													</tr>
+													<tr>
+														<td><input type="checkbox" class="prditemtlist" name=""></td>
+														<td><div class="d-flex align-items-center">
+															<div id="prd-img">
+																<img src="assets/images/thumbimg.png" class="prdimg">
+															</div>
+															<div id="prd-details" class="p-2">
+																<h6>SKU 2932</h6>
+																<h5>Product Name Lorem Ipsum dor sit </h5>
+															</div>
+														</div></td>
+														<td><div id="sent-review">
+															<label class="orange text-white text-uppercase p-1">Neutral</label>
+														</div></td>
+														<td><div>Good Quality</div></td>
+														<td>
+															<div>
+																<fieldset class="rating">
+    <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+    <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+    <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+    <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+    <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+    <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+    <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+    <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+    <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+    <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+															</div>
+														</td>
+														<td><div class="d-flex-inline">
+															<p><a>sysadmin@powerweave.com</a></p>
+															<p><span>12 March, 2020</span></p>
+														</div></td>
+														<td><div id="prd-status"><p class="skyblue-text-color">Approved</p></div></td>
+														<td><div class="d-flex  justify-content-around" style="font-size:1rem;">
+															<p><span><i class="fa fa-trash-o"></i></span></p>
+															<p><span><i class="fa fa-eye"></i></span></p></div>
+														</td>
+													</tr>
+												<tr>
+														<td><input type="checkbox" class="prditemtlist" name=""></td>
+														<td><div class="d-flex align-items-center">
+															<div id="prd-img">
+																<img src="assets/images/thumbimg.png" class="prdimg">
+															</div>
+															<div id="prd-details" class="p-2">
+																<h6>SKU 2932</h6>
+																<h5>Product Name Lorem Ipsum dor sit </h5>
+															</div>
+														</div></td>
+														<td><div id="sent-review">
+															<label class="pink text-white text-uppercase p-1">Abusive</label>
+														</div></td>
+														<td><div>Unsatisfied</div></td>
+														<td>
+															<div>
+																<fieldset class="rating">
+    <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+    <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+    <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+    <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+    <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+    <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+    <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+    <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+    <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+    <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+															</div>
+														</td>
+														<td><div class="d-flex-inline">
+															<p><a>sysadmin@powerweave.com</a></p>
+															<p><span>12 March, 2020</span></p>
+														</div></td>
+														<td><div id="prd-status"><p class="pink-text-color">Pending</p></div></td>
+														<td><div class="d-flex  justify-content-around" style="font-size:1rem;">
+															<p><span><i class="fa fa-trash-o"></i></span></p>
+															<p><span><i class="fa fa-eye"></i></span></p></div>
+														</td>
+													</tr>
+													<tr>
+														<td><input type="checkbox" class="prditemtlist" name=""></td>
+														<td><div class="d-flex align-items-center">
+															<div id="prd-img">
+																<img src="assets/images/thumbimg.png" class="prdimg">
+															</div>
+															<div id="prd-details" class="p-2">
+																<h6>SKU 2932</h6>
+																<h5>Product Name Lorem Ipsum dor sit </h5>
+															</div>
+														</div></td>
+														<td><div id="sent-review">
+															<label class="cyan text-white text-uppercase p-1">Positive</label>
+														</div></td>
+														<td><div>Excellent Quality</div></td>
+														<td>
+															<div>
+																<fieldset class="rating">
+    <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+    <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+    <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+    <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+    <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+    <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+    <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+    <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+    <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+    <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+															</div>
+														</td>
+														<td><div class="d-flex-inline">
+															<p><a>sysadmin@powerweave.com</a></p>
+															<p><span>12 March, 2020</span></p>
+														</div></td>
+														<td><div id="prd-status"><p class="skyblue-text-color">Approved</p></div></td>
+														<td><div class="d-flex  justify-content-around" style="font-size:1rem;">
+															<p><span><i class="fa fa-trash-o"></i></span></p>
+															<p><span><i class="fa fa-eye"></i></span></p></div>
+														</td>
+													</tr>
+													<tr>
+														<td><input type="checkbox" class="prditemtlist" name=""></td>
+														<td><div class="d-flex align-items-center">
+															<div id="prd-img">
+																<img src="assets/images/thumbimg.png" class="prdimg">
+															</div>
+															<div id="prd-details" class="p-2">
+																<h6>SKU 2932</h6>
+																<h5>Product Name Lorem Ipsum dor sit </h5>
+															</div>
+														</div></td>
+														<td><div id="sent-review">
+															<label class="pink text-white text-uppercase p-1">Abusive</label>
+														</div></td>
+														<td><div>Excellent Product</div></td>
+														<td>
+															<div>
+																<fieldset class="rating">
+    <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+    <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+    <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+    <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+    <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+    <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+    <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+    <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+    <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+    <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+															</div>
+														</td>
+														<td><div class="d-flex-inline">
+															<p><a>sysadmin@powerweave.com</a></p>
+															<p><span>12 March, 2020</span></p>
+														</div></td>
+														<td><div id="prd-status"><p class="pink-text-color">Pending</p></div></td>
+														<td><div class="d-flex  justify-content-around" style="font-size:1rem;">
+															<p><span><i class="fa fa-trash-o"></i></span></p>
+															<p><span><i class="fa fa-eye"></i></span></p></div>
+														</td>
+													</tr>
+													
+												</tbody>
+											</table>
+										</div>
+									</div>
+
+				    				</div>
+
+									
+
+
+				    				</div>
+				    			</div>
+
+				    	</div>
+				    </div>
+				    
+				    </section>
+	    	</main>  
+    		<footer>
+		    	<div class="container-fluid">
+		    			<h6><span>&copy;</span> PWRD by Powerweave 2020</h6>
+		    	</div>
+			</footer>
+  </div>
+
+   <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script> -->
+   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <script src="assets/js/progresscircle.js"></script> -->
+  <script src="assets/js/custom1.js"></script>
+  <script type="text/javascript">
+	// $(document).reaady(function(){
+		function showdata(){
+	        $.ajax({
+	        	url:'',
+	        	type:'GET',
+	        	success: function(data){
+	        			$('tbody').html(data)
+	        	}
+
+	        })
+    	}
+  	// });
+  </script>
+</body>
+</html>
